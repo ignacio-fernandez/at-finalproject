@@ -11,3 +11,5 @@ function close_position()
         end
     end
 end
+
+%test
