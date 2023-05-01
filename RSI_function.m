@@ -35,11 +35,6 @@ function [S] = Signal(bar, h, L, U)
     end
     RS1= ((1/h)*UU1)/((1/h)*DD1);
     RSI1 = 100*(1-(1/(1+RS1)));
-    
-    disp("RSI(T) = ");
-    disp(RSI2);
-    disp("RSI(T-1) = ")
-    disp(RSI1);
 
     % Check for buy and sell signals
     s = 0;
