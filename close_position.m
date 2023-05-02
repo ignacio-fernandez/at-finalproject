@@ -3,7 +3,8 @@ function close_position()
     tickersCO = {portfolioData.localSymbol};
     for tCOs = tickersCO
         tCO = string(tCOs);
-        pos = Position(tCO);
+
+        pos = get_position(tCO);
         if pos < 0
             IBMatlab('action','BUY','symbol',tCO,'quantity',-pos,'type','MKT');
         elseif pos > 0
@@ -11,5 +12,3 @@ function close_position()
         end
     end
 end
-
-%test
