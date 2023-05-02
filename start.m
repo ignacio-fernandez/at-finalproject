@@ -15,8 +15,10 @@ function start(handles)
         else
             % execute trade
         end
-
-        X(i) = total_pnl(portfolio());
+        
+        p = portfolio();
+        set(handles.portfolio_table, 'Data', p);
+        X(i) = total_pnl(p);
 
         if i <= windowSize
             plot(handles.pnl_graph, 0:i-1, X(1:i));

@@ -56,7 +56,8 @@ function graph_test_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 set(handles.pause_btn, 'visible', 'off');
 set(handles.stop_btn, 'visible', 'off');
-
+p = portfolio();
+set(handles.portfolio_table, 'Data',p);
 % Update handles structure
 guidata(hObject, handles);
 
