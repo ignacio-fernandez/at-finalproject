@@ -82,7 +82,7 @@ function start_btn_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.pause_btn, 'userdata', 0, 'string', 'Pause Trading', 'visible', 'on');
 set(handles.stop_btn, 'userdata', 0, 'visible', 'on');
-set(handles.start_btn, 'Enable', 'off', 'visible', 'off');
+set(handles.start_btn, 'visible', 'off');
 start(handles);
 
 
@@ -110,3 +110,6 @@ function stop_btn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.stop_btn, 'userdata', 1); % will be used to close position
+set(handles.start_btn, 'Enable', 'on', 'visible', 'on');
+set(handles.stop_btn, 'visible', 'off');
+set(handles.pause_btn, 'visible', 'off');

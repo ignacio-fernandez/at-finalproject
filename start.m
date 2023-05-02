@@ -14,7 +14,7 @@ function start(handles)
         if i <= maxSize
             plot(1:i, X);
         else
-            plot(i-maxSize:i, X(end-maxSize:end));
+            plot(handles.pnl_graph, i-maxSize:i, X(end-maxSize:end));
         end
         
         i = i+1;
@@ -22,6 +22,7 @@ function start(handles)
         pause(1);
 
         if get(handles.stop_btn, 'userdata') % stop condition
+            cla(handles.pnl_graph);
             break;
         end
     end
