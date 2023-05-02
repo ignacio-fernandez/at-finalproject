@@ -8,7 +8,7 @@ function start(handles)
         if get(handles.pause_btn, 'userdata')
             X(i) = X(i-1);
         else
-            X(i) = rand;
+            X(i) = total_pnl(portfolio());
         end
 
         if i <= maxSize
