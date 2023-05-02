@@ -5,6 +5,11 @@ function start(handles)
     X = zeros(arraySize, 1);
 
     while (1)
+        if get(handles.stop_btn, 'userdata') % stop condition
+            cla(handles.pnl_graph);
+            break;
+        end
+
         if get(handles.pause_btn, 'userdata')
             % do nothing
         else
@@ -14,7 +19,7 @@ function start(handles)
         X(i) = total_pnl(portfolio());
 
         if i <= windowSize
-            plot(handles.pnl_graph, 1:i, X(1:i));
+            plot(handles.pnl_graph, 0:i-1, X(1:i));
         else
             plot(handles.pnl_graph, i-windowSize:i, X(i-windowSize:i));
         end
@@ -22,10 +27,5 @@ function start(handles)
         i = i+1;
    
         pause(1);
-
-        if get(handles.stop_btn, 'userdata') % stop condition
-            cla(handles.pnl_graph);
-            break;
-        end
     end
 end
