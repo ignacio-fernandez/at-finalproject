@@ -5,9 +5,18 @@ function start(handles)
     X = zeros(arraySize, 1);
 
     while (1)
+<<<<<<< Updated upstream
         if get(handles.stop_btn, 'userdata') % stop condition
             cla(handles.pnl_graph);
             break;
+=======
+        if get(handles.pause_btn, 'userdata')
+            X(i) = X(i-1);
+        else
+            p = portfolio();
+            set(handles.portfolio_table, 'Data', p);
+            X(i) = total_pnl(p);
+>>>>>>> Stashed changes
         end
 
         if get(handles.pause_btn, 'userdata')

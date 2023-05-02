@@ -22,7 +22,7 @@ function varargout = graph_test(varargin)
 
 % Edit the above text to modify the response to help graph_test
 
-% Last Modified by GUIDE v2.5 01-May-2023 20:30:52
+% Last Modified by GUIDE v2.5 01-May-2023 23:49:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,6 +56,9 @@ function graph_test_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 set(handles.pause_btn, 'visible', 'off');
 set(handles.stop_btn, 'visible', 'off');
+set(handles.start_btn, 'visible', 'on');
+p = portfolio();
+set(handles.portfolio_table, 'Data',p);
 
 % Update handles structure
 guidata(hObject, handles);
@@ -85,7 +88,6 @@ set(handles.stop_btn, 'userdata', 0, 'visible', 'on');
 set(handles.start_btn, 'visible', 'off');
 start(handles);
 
-
 % --- Executes on button press in pause_btn.
 function pause_btn_Callback(hObject, eventdata, handles)
 % hObject    handle to pause_btn (see GCBO)
@@ -111,3 +113,4 @@ set(handles.stop_btn, 'userdata', 1); % will be used to close position
 set(handles.start_btn, 'Enable', 'on', 'visible', 'on');
 set(handles.stop_btn, 'visible', 'off');
 set(handles.pause_btn, 'visible', 'off');
+
