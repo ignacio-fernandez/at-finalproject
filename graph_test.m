@@ -93,15 +93,13 @@ function pause_btn_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 prevState = get(handles.pause_btn, 'userdata');
 
-set(handles.pause_btn,'userdata',not(prevState));
-
 if prevState
     message = 'Pause Trading';
 else
     message = 'Resume Trading';
 end
 
-set(handles.pause_btn, 'string', message);
+set(handles.pause_btn, 'string', message, 'userdata', not(prevState));
 
 
 % --- Executes on button press in stop_btn.

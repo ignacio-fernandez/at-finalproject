@@ -1,20 +1,22 @@
 function start(handles)
     i = 2;
-    maxSize = 10;
-    X = 0;
-    % X initialized arbitrarily for testing
-    % Will need to be replaced with PnL data
+    windowSize = 10;
+    arraySize = 2^16;
+    X = zeros(arraySize, 1);
+
     while (1)
         if get(handles.pause_btn, 'userdata')
-            X(i) = X(i-1);
+            % do nothing
         else
-            X(i) = total_pnl(portfolio());
+            % execute trade
         end
 
-        if i <= maxSize
-            plot(1:i, X);
+        X(i) = total_pnl(portfolio());
+
+        if i <= windowSize
+            plot(handles.pnl_graph, 1:i, X(1:i));
         else
-            plot(handles.pnl_graph, i-maxSize:i, X(end-maxSize:end));
+            plot(handles.pnl_graph, i-windowSize:i, X(i-windowSize:i));
         end
         
         i = i+1;
