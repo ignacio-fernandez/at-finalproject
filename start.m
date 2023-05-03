@@ -30,6 +30,6 @@ function start(handles)
         
         i = i+1;
    
-        pause(1);
+        pause(5);
     end
 end
