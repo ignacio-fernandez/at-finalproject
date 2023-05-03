@@ -1,26 +1,21 @@
-function [buy, sell] = execute_signals(X, slow, macd_window, fast, rsi_period, kdj_period, L, U)
-    % Compute the MACD indicator
-    macd_line = ema(X, fast) - ema(X, slow);
-    signal_line = ema(macd_line, macd_window);
-    
-    % Compute the RSI indicator
-    RSI = rsi(X, rsi_period, L, U);
-    
-    % Compute the KDJ indicator
-    [K, D] = kdj(X, kdj_period);
-    
-    % Determine buy and sell signals based on the indicators
-    if (macd_line(end-1) < signal_line(end-1)) && (macd_line(end) > signal_line(end)) ...
-            && (RSI == 1 || K == 1 || D == 1)
-        buy = true;
-    else
-        buy = false;
-    end
-    
-    if (macd_line(end-1) > signal_line(end-1)) && (macd_line(end) < signal_line(end)) ...
-            && (RSI == -1 || K == -1 || D == -1)
-        sell = true;
-    else
-        sell = false;
-    end
+function Execution(dollar, symbol,signals)
+
+
+
+new_data = IBMatlab('action','query', 'symbol', symbol)
+last = new_data.lastPrice;
+bid1 = new_data.bidPrice;
+ask1 = new_data.askPrice;
+
+N = round(dollar / last, 0);
+
+random_nums = randi(1, N);
+normalized_nums = random_nums / sum(random_nums) * N;
+
+orderId = IBMatlab('action', BuySell, 'symbol', symbol, 'quantity',
+normalized_nums(i), 'type', 'MKT');
+
+rand_time = rand() * 2 + 1;
+pause(rand_time*0.5);
+
 end
