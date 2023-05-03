@@ -17,12 +17,18 @@ highest_high = highest(high, window);
 lowest_low = lowest(low, window);
 
 % Calculate the %K line
-K = 100 * (close - lowest_low) ./ (highest_high - lowest_low);
+RSV = 100 * (close(-1) - lowest_low) ./ (highest_high - lowest_low);
+
+K = 2/3*
 
 % Calculate the %D line
 D = sma(K, d_window);
 
 % Calculate the %J line
 J = 3 * K - 2 * D;
+
+
+
+if 
 
 end
