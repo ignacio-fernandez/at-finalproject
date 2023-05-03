@@ -8,10 +8,10 @@ function P = portfolio()
     realizedPnL = transpose({portfolioData.realizedPnL});
     
     %closePx = zeros(length(tickers),1);
-    %idx = 1;
-    %for t=tickers
-        %bar = IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',1);
-        %closePx(idx) = bar.close;
+    %for i=1:length(tickers)
+    %    bar = IBMatlab('action','realtime', 'symbol',string(tickers(i)),'QuotesNumber',1);
+    %    pause(1);
+    %    closePx(i) = bar.close;
     %end
     closePx = ((2*rand(length(tickers),1))-1)+cell2mat(avgPx);
 

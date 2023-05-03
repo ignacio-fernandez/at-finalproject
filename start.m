@@ -1,6 +1,6 @@
 function start(handles)
     i = 2;
-    windowSize = 10;
+    windowSize = 20;
     arraySize = 2^16;
     X = zeros(arraySize, 1);
 
@@ -17,8 +17,10 @@ function start(handles)
         end
         
         p = portfolio();
+        curr_pnl = total_pnl(p);
         set(handles.portfolio_table, 'Data', p);
-        X(i) = total_pnl(p);
+        set(handles.total_pnl_text, 'String', curr_pnl);
+        X(i) = curr_pnl;
 
         if i <= windowSize
             plot(handles.pnl_graph, 0:i-1, X(1:i));

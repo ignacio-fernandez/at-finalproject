@@ -58,6 +58,8 @@ set(handles.pause_btn, 'visible', 'off');
 set(handles.stop_btn, 'visible', 'off');
 p = portfolio();
 set(handles.portfolio_table, 'Data',p);
+set(handles.portfolio_table,'ColumnName',{'Ticker' 'Position' 'Avg PX' 'MV' 'Unrealized PnL' 'Realized PnL'})
+set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quanitity' 'Fill PX', 'Status'})
 % Update handles structure
 guidata(hObject, handles);
 
