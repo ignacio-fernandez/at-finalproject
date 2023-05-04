@@ -5,14 +5,14 @@ function start(handles)
     X = zeros(arraySize, 1);
     
     %tickers = %get user input here
-    tickers = ['AAPL', 'TSLA', 'NVDA'];
+    tickers = ["DIS", "TSLA", "NVDA", "AAPL", "TXN"];
     for t = tickers
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
     end
     
     while (1)
-        bars = zeros(length(tickers),1);
-        for j = 1:length(tickers)
+        bars = IBMatlab('action','realtime', 'symbol',tickers(1),'QuotesNumber',-1);
+        for j = 2:length(tickers)
             bars(j) = IBMatlab('action','realtime', 'symbol',tickers(j),'QuotesNumber',-1);
         end
         if get(handles.stop_btn, 'userdata') % stop condition
