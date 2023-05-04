@@ -5,6 +5,8 @@ function start(handles)
     X = zeros(arraySize, 1);
     
     %tickers = %get user input here
+    %dollar = %get user input here, dollar amount of each trade
+    dollar = 20000;
     tickers = ["DIS", "TSLA", "NVDA", "AAPL", "TXN"];
     for t = tickers
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
@@ -26,7 +28,7 @@ function start(handles)
         if get(handles.pause_btn, 'userdata')
             % do nothing
         else
-            % execute trade
+            exe(bars, dollar);
         end
         
         p = portfolio(bars);
