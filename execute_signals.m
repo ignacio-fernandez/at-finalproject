@@ -1,6 +1,6 @@
 function orderId = execute_signals(dollar, symbol,signals, close)
 
-result = zeros(1, size(newArray, 2));
+result = zeros(1, size(signals, 2));
 
 for i = 1:size(signals, 2)
     column = signals(:, i);
