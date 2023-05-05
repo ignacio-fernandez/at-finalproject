@@ -2,7 +2,7 @@
 function P = portfolio(bars)   
     portfolioData = IBMatlab('action','portfolio');
     if ~isempty(portfolioData)
-        tickers = transpose({portfolioData.localSymbol});
+        tickers = transpose({portfolioData.symbol});
         pos = transpose({portfolioData.position});
         avgPx = transpose({portfolioData.averageCost});
         MV = num2cell(cell2mat(avgPx).*cell2mat(pos));
