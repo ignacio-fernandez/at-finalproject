@@ -57,13 +57,12 @@ handles.output = hObject;
 set(handles.pause_btn, 'visible', 'off');
 set(handles.stop_btn, 'visible', 'off');
 set(handles.portfolio_table,'ColumnName',{'Ticker' 'Position' 'Avg PX' 'MV' 'Unrealized PnL' 'Realized PnL'})
-set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quanitity' 'Fill PX', 'Status'})
 set(handles.slow_text, 'String', get_slider_value(handles.slow_slider));
 set(handles.fast_text, 'String', get_slider_value(handles.fast_slider));
 set(handles.macd_text, 'String', get_slider_value(handles.macd_slider));
 set(handles.rsi_up, 'String', get_slider_value(handles.up_slider));
 set(handles.rsi_low, 'String', get_slider_value(handles.low_slider));
-
+set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quantity' 'Fill PX', 'Time'})
 % Update handles structure
 guidata(hObject, handles);
 

@@ -1,47 +1,29 @@
-function [signal] = kdj(bar_data, n, m1)
-% Inputs:
-%   - bar_data: 4-D array of bar data (open, high, low, close)
-%   - n: look-back period for calculating K line
-%   - m1: smoothing period for calculating D line
-%   - m2: smoothing period for calculating J line
-% Outputs:
-%   - K: array of K line values
-%   - D: array of D line values
-%   - J: array of J line values
-%   - signal: array of trading signals (0 = no signal, 1 = buy, -1 = sell)
+function signal = kdj(bar)
+n = 9;
+m1 = 3;
+m2 = 3;
 
-% Calculate RSV values
-highest_high = max(bar_data(:, 2), [], 2);
-lowest_low = min(bar_data(:, 3), [], 2);
-RSV = (bar_data(:, 4) - lowest_low) ./ (highest_high - lowest_low) * 100;
+K = 50;
+D = 50;
 
-% Calculate K line
-K = sma(RSV, n, 1);
+i = length(bar.close);
+if i >= n
+    HH = max(bar.high(i-n+1:i));
+    LL = min(bar.low(i-n+1:i));
+    RSV = (bar.close(i) - LL) / (HH - LL) * 100;
+else
+    RSV = 0;
+end
 
-% Calculate D line
-D = sma(K, m1, 1);
-
-% Calculate J line
+K = (m1 * K + RSV) / (m1 + 1);
+D = (m2 * D + K) / (m2 + 1);
 J = 3 * K - 2 * D;
 
-% Generate trading signals
-signal = zeros(size(J));
-signal(K < 20 & D < 20) = 1; % buy signal
-signal(K > 80 & D > 80) = -1; % sell signal
-end
-
-function out = sma(x, n, dim)
-% Simple moving average function
-persistent weights
-if isempty(weights) || length(weights) ~= n
-    weights = ones(n, 1) / n;
-end
-out = convn(x, weights, 'same');
-if dim == 1
-    out(1:n-1,:) = NaN;
+if K < 30 && D < 30 || K < 30 && J < 30 || D < 30 && J < 30
+    signal = 1;
+elseif K > 70 && D > 70 || K > 70 && J > 70 || D > 70 && J > 70
+    signal = -1;
 else
-    out(:,1:n-1) = NaN;
+    signal = 0;
 end
 end
-
-
