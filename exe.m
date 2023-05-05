@@ -6,7 +6,7 @@ for i = 1:length(bars)
     close = bar.data.close;
     macd_vec = macd(close, 26, 9, 12);
     rsi_vec = rsi(close, 6, 20, 80);
-    kdj_vec = kdj(bar, 9, 3);
+    kdj_vec = kdj(bar.data, 9, 3);
     signals = vertcat(macd_vec, rsi_vec, kdj_vec);
     orderId = execute_signals(dollar, symbol,signals, close);
     disp(orderId);
