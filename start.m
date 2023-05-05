@@ -4,17 +4,23 @@ function start(handles)
     arraySize = 2^16;
     X = zeros(arraySize, 1);
     
-    %tickers = %get user input here
-    tickers = ['AAPL', 'TSLA', 'NVDA'];
+    [tickers, dollars] = get_inputs(handles.A);
+
     for t = tickers
+        disp(t);
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
     end
     
     while (1)
-        bars = zeros(length(tickers),1);
-        for j = 1:length(tickers)
-            bars(j) = IBMatlab('action','realtime', 'symbol',tickers(j),'QuotesNumber',-1);
+        % See if there's a more efficient way to create bars array
+        bars = IBMatlab('action','realtime', 'symbol',tickers(1),'QuotesNumber',-1);
+        if length(tickers) > 1    
+            for j = 2:length(tickers)
+                bars(j) = IBMatlab('action','realtime', 'symbol',tickers(j),'QuotesNumber',-1);
+            end
         end
+
+        
         if get(handles.stop_btn, 'userdata') % stop condition
             cla(handles.pnl_graph);
             break;
@@ -23,7 +29,7 @@ function start(handles)
         if get(handles.pause_btn, 'userdata')
             % do nothing
         else
-            % execute trade
+            exe(bars, dollars);
         end
         
         p = portfolio(bars);

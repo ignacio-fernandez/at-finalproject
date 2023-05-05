@@ -22,7 +22,7 @@ function varargout = graph_test(varargin)
 
 % Edit the above text to modify the response to help graph_test
 
-% Last Modified by GUIDE v2.5 01-May-2023 20:30:52
+% Last Modified by GUIDE v2.5 05-May-2023 13:08:05
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,10 +56,14 @@ function graph_test_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 set(handles.pause_btn, 'visible', 'off');
 set(handles.stop_btn, 'visible', 'off');
-p = portfolio();
-set(handles.portfolio_table, 'Data',p);
 set(handles.portfolio_table,'ColumnName',{'Ticker' 'Position' 'Avg PX' 'MV' 'Unrealized PnL' 'Realized PnL'})
 set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quanitity' 'Fill PX', 'Status'})
+set(handles.slow_text, 'String', get_slider_value(handles.slow_slider));
+set(handles.fast_text, 'String', get_slider_value(handles.fast_slider));
+set(handles.macd_text, 'String', get_slider_value(handles.macd_slider));
+set(handles.rsi_up, 'String', get_slider_value(handles.up_slider));
+set(handles.rsi_low, 'String', get_slider_value(handles.low_slider));
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -114,3 +118,137 @@ set(handles.stop_btn, 'userdata', 1); % will be used to close position
 set(handles.start_btn, 'Enable', 'on', 'visible', 'on');
 set(handles.stop_btn, 'visible', 'off');
 set(handles.pause_btn, 'visible', 'off');
+
+
+% --- Executes on slider movement.
+function slow_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to slow_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.slow_text, 'String', get_slider_value(handles.slow_slider));
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slow_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slow_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function fast_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to fast_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.fast_text, 'String', get_slider_value(handles.fast_slider));
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function fast_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to fast_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function macd_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to macd_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.macd_text, 'String', get_slider_value(handles.macd_slider));
+
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function macd_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to macd_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function up_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to up_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.rsi_up, 'String', get_slider_value(handles.up_slider));
+
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function up_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to up_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function low_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to low_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.rsi_low, 'String', get_slider_value(handles.low_slider));
+
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function low_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to low_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes when entered data in editable cell(s) in input_table.
+function input_table_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to uitable1 (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
+A=get(hObject, 'Data');
+handles.A = A;
+guidata(hObject, handles);
