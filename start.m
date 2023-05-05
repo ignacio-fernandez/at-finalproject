@@ -7,7 +7,6 @@ function start(handles)
     [tickers, dollars] = get_inputs(handles.A);
 
     for t = tickers
-        disp(t);
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
     end
     
@@ -29,7 +28,7 @@ function start(handles)
         if get(handles.pause_btn, 'userdata')
             % do nothing
         else
-            exe(bars, dollars);
+            exe(bars, dollars, get_params(handles));
         end
         
         p = portfolio(bars);

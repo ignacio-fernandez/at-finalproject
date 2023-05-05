@@ -1,4 +1,4 @@
-function exe(bars, dollars)
+function exe(bars, dollars, params)
 for i = 1:length(bars)
     bar = bars(i);
     disp(bar);
@@ -6,8 +6,8 @@ for i = 1:length(bars)
     % calculate signals and combine to a 2d-vector, which is signals
     symbol = bar.symbol;
     close = bar.data.close;
-    macd_vec = macd(close, 26, 9, 12);
-    rsi_vec = rsi(close, 6, 30, 70);
+    macd_vec = macd(close, params.slow, params.macd, params.fast);
+    rsi_vec = rsi(close, 6, params.lower, params.upper);
     kdj_vec = kdj(bar.data);
     signals = vertcat(macd_vec, rsi_vec, kdj_vec);
     disp("Signals:");

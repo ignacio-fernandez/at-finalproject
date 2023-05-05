@@ -1,4 +1,5 @@
 function [S] = macd(X, slow, macd_window, fast)
+    disp(slow);
     slow_line = ema(X, slow);
     fast_line = ema(X, fast);
     macd_line = fast_line(end-macd_window:end) - slow_line(end-macd_window:end);

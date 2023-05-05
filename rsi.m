@@ -1,4 +1,5 @@
 function [S] = rsi(X, h, L, U)
+    disp(L);
     R = diff(X);
 
     UUt = R.*(R > 0);
