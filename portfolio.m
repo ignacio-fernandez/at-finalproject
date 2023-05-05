@@ -1,5 +1,5 @@
 
-function P = portfolio()   
+function P = portfolio(bars)   
     portfolioData = IBMatlab('action','portfolio');
     tickers = transpose({portfolioData.localSymbol});
     pos = transpose({portfolioData.position});
@@ -8,12 +8,15 @@ function P = portfolio()
     realizedPnL = transpose({portfolioData.realizedPnL});
     
     closePx = zeros(length(tickers),1);
-    for i=1:length(tickers)
-        bar = IBMatlab('action','realtime', 'symbol',string(tickers(i)),'QuotesNumber',-1);
-        closePx(i) = bar.data.close(length(bar.data.close));
+    for i=1:length(bars)
+        ticker_idx = find(string(tickers)==bars(i).symbol);
+        if ~isempty(ticker_idx)   
+            closePx(ticker_idx) = bars(i).data.close(length(bars(i).data.close));
+        end
     end
 
     unrealizedPnL = num2cell((closePx-cell2mat(avgPx)).*cell2mat(pos));
 
     P = [tickers,pos,avgPx,MV,unrealizedPnL,realizedPnL];
+
 end
