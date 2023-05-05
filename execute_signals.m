@@ -18,7 +18,7 @@ for i = 1:size(signals, 2)
     end
 end
 
-action = result(-1);
+action = result(end);
 if action ~= 0
     if action > 0
         action = 'BUY';
@@ -26,7 +26,7 @@ if action ~= 0
         action = 'SELL';
     end
     
-    N = round(dollar / close, 0);
+    N = round(dollar / close(end), 0);
    
     
     orderId = IBMatlab('action', action, 'symbol', symbol, 'quantity', N, 'type', 'MKT');

@@ -35,6 +35,7 @@ function start(handles)
         curr_pnl = total_pnl(p);
         set(handles.portfolio_table, 'Data', p);
         set(handles.total_pnl_text, 'String', curr_pnl);
+        set(handles.orders_table, 'Data', orders());
         X(i) = curr_pnl;
 
         if i <= windowSize
@@ -44,7 +45,7 @@ function start(handles)
         end
         
         i = i+1;
-   
+
         pause(5);
     end
 end
