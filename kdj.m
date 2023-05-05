@@ -19,9 +19,9 @@ K = (m1 * K + RSV) / (m1 + 1);
 D = (m2 * D + K) / (m2 + 1);
 J = 3 * K - 2 * D;
 
-if K < 20 && D < 20 || K < 20 && J < 20 || D < 20 && J < 20
+if K < 30 && D < 30 || K < 30 && J < 30 || D < 30 && J < 30
     signal = 1;
-elseif K > 80 && D > 80 || K > 80 && J > 80 || D > 80 && J > 80
+elseif K > 70 && D > 70 || K > 70 && J > 70 || D > 70 && J > 70
     signal = -1;
 else
     signal = 0;
