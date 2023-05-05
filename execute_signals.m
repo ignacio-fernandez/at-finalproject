@@ -3,7 +3,8 @@ function orderId = execute_signals(dollar, symbol,signals, close)
 result = zeros(1, size(signals, 2));
 
 for i = 1:size(signals, 2)
-    column = signals(:, i);
+    column = signals(2:end, i);
+    macd = signals(1,i);
     
    
     [uniqueNums, ~, indices] = unique(column);
@@ -18,18 +19,27 @@ for i = 1:size(signals, 2)
     end
 end
 
-action = result(end);
-if action ~= 0
-    if action > 0
+signal = result(end);
+N = round(dollar / close(end), 0);
+if macd(end) ~= 0
+    % trade on mac d
+    if macd(end) > 0
         action = 'BUY';
     else
         action = 'SELL';
     end
-    
-    N = round(dollar / close(end), 0);
-   
+
+    orderId = IBMatlab('action', action, 'symbol', symbol, 'quantity', N, 'type', 'MKT');
+elseif signal ~= 0
+    if signal > 0
+        action = 'BUY';
+    else
+        action = 'SELL';
+    end   
     
     orderId = IBMatlab('action', action, 'symbol', symbol, 'quantity', N, 'type', 'MKT');
 else
     orderId = NaN;
 end
+end
+

@@ -62,7 +62,8 @@ set(handles.fast_text, 'String', get_slider_value(handles.fast_slider));
 set(handles.macd_text, 'String', get_slider_value(handles.macd_slider));
 set(handles.rsi_up, 'String', get_slider_value(handles.up_slider));
 set(handles.rsi_low, 'String', get_slider_value(handles.low_slider));
-set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quantity' 'Fill PX', 'Time'})
+set(handles.orders_table,'ColumnName',{'Ticker' 'Actn' 'Quantity' 'Fill PX', 'Time'});
+handles.A = get(handles.input_table, 'Data');
 % Update handles structure
 guidata(hObject, handles);
 
