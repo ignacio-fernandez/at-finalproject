@@ -7,7 +7,6 @@ function start(handles)
     [tickers, dollars] = get_inputs(handles.A);
 
     for t = tickers
-        disp(t);
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
     end
     
