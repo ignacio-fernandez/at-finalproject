@@ -1,7 +1,6 @@
 function exe(bars, dollars, params)
 for i = 1:length(bars)
     bar = bars(i);
-    disp(bar);
     dollar = dollars(i);
     % calculate signals and combine to a 2d-vector, which is signals
     symbol = bar.symbol;

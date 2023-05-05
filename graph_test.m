@@ -117,7 +117,9 @@ set(handles.stop_btn, 'userdata', 1); % will be used to close position
 set(handles.start_btn, 'Enable', 'on', 'visible', 'on');
 set(handles.stop_btn, 'visible', 'off');
 set(handles.pause_btn, 'visible', 'off');
-
+close_position();
+set(handles.portfolio_table, 'Data', []);
+set(handles.orders_table, 'Data', orders());
 
 % --- Executes on slider movement.
 function slow_slider_Callback(hObject, eventdata, handles)
