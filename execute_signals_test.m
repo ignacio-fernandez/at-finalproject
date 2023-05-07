@@ -1,4 +1,4 @@
-function orderId = execute_signals_test(dollar, symbol,signals, close)
+function [pos, closePx] = execute_signals_test(dollar, symbol,signals, close)
 
 disp(signals);
 result = zeros(1, size(signals, 2));
@@ -31,7 +31,8 @@ if macd(end) ~= 0
         N = -N;
     end
 
-    orderId = [N, close(end)];
+    pos = N;
+    closePx = close(end);
 elseif signal ~= 0
     if signal > 0
         action = 'BUY';
@@ -40,8 +41,10 @@ elseif signal ~= 0
         N = -N;
     end   
     
-    orderId = [N, close(end)];
+    pos = N;
+    closePx = close(end);
 else
-    orderId = [];
+    pos = [];
+    closePx = [];
 end
 end
