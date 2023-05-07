@@ -11,7 +11,6 @@ function start(handles)
     end
     
     while (1)
-        % See if there's a more efficient way to create bars array
         bars = IBMatlab('action','realtime', 'symbol',tickers(1),'QuotesNumber',-1);
         if length(tickers) > 1    
             for j = 2:length(tickers)
