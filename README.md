@@ -3,7 +3,7 @@
 ### Donald
   1. Portfolio & portfolio table
   2. Orders & orders table
-  3. Stream data
+  3. Close all positions function
   4. PnL tracking
 ### Ignacio
   1. PnL plot
