@@ -10,6 +10,8 @@
 ### Hong Hao
   1. 
 ### Yanggong
-  1. 
+  1. KDJ Strategy
+  2. trading signal
+  3. execution function
 ## Instructions
 Run the graph_test.m file
