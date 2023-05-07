@@ -11,7 +11,7 @@ for i = 1:length(bars)
     signals = vertcat(macd_vec, rsi_vec, kdj_vec);
     disp("Signals:");
     disp(signals);
-    orderId = execute_signals(dollar, symbol,signals, close);
+    orderId = execute_signals_test(dollar, symbol,signals, close); % CHANGE BACK TO execute_signal
     %disp(orderId);
-
+end
 end
