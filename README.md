@@ -1,10 +1,5 @@
 # Auto Trading Final Project
-### Members
-  1. Donnald Donnelly
-  2. Ignacio Fernandez Alcaraz
-  3. Hong Hao (Brandon) Chen
-  4. Yanggong (Ray) Chi
-## Contributions
+## Members and Contributions
 ### Donald
   1. 
 ### Ignacio
