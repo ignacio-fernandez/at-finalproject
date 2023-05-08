@@ -1,4 +1,4 @@
-function [pos, close] = exe_test(bars, dollars, params)
+function [pos, close] = exe_test(bars, dollars, params, position)
 for i = 1:length(bars)
     bar = bars(i);
     dollar = dollars(i);
@@ -11,7 +11,7 @@ for i = 1:length(bars)
     signals = vertcat(macd_vec, rsi_vec, kdj_vec);
     disp("Signals:");
     disp(signals);
-    [pos, close] = execute_signals_test(dollar, symbol,signals, close); % CHANGE BACK TO execute_signal
+    [pos, close] = execute_signals_test(dollar, symbol,signals, close, position);
     %disp(orderId);
 end
 end

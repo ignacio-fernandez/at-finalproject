@@ -1,4 +1,4 @@
-function [pos, closePx] = execute_signals_test(dollar, symbol,signals, close)
+function [pos, closePx] = execute_signals_test(dollar, symbol,signals, close, position)
 
 disp(signals);
 result = zeros(1, size(signals, 2));
@@ -25,21 +25,41 @@ N = round(dollar / close(end), 0);
 if macd(end) ~= 0
     % trade on mac d
     if macd(end) > 0
-        action = 'BUY';
+        if position >= 0
+            action = 'BUY';
+        else
+            action = 'BUY';
+            N = N - position;
+        end
     else
-        action = 'SELL';
-        N = -N;
+        if position <= 0
+            action = 'SELL';
+            N = -N;
+        else
+            action = 'SELL';
+            N = -N - position;
+        end
     end
 
     pos = N;
     closePx = close(end);
 elseif signal ~= 0
     if signal > 0
-        action = 'BUY';
+         if position >= 0
+            action = 'BUY';
+        else
+            action = 'BUY';
+            N = N - position;
+        end
     else
-        action = 'SELL';
-        N = -N;
-    end   
+        if position <= 0
+            action = 'SELL';
+            N = -N;
+        else
+            action = 'SELL';
+            N = -N - position;
+        end
+    end
     
     pos = N;
     closePx = close(end);

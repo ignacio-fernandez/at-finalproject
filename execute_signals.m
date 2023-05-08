@@ -24,22 +24,39 @@ N = round(dollar / close(end), 0);
 if macd(end) ~= 0
     % trade on mac d
     if macd(end) > 0
-        action = 'BUY';
+        orderId = BuyOrder(symbol, N);
     else
-        action = 'SELL';
+        orderId = SellOrder(symbol, N);
     end
 
-    orderId = IBMatlab('action', action, 'symbol', symbol, 'quantity', N, 'type', 'MKT');
 elseif signal ~= 0
     if signal > 0
-        action = 'BUY';
+        orderId = BuyOrder(symbol, N);
     else
-        action = 'SELL';
-    end   
+        orderId = SellOrder(symbol, N);
+    end
     
-    orderId = IBMatlab('action', action, 'symbol', symbol, 'quantity', N, 'type', 'MKT');
 else
     orderId = NaN;
 end
+end
+
+function B = BuyOrder(tickerB, N)
+    position = get_position(tickerB);
+    if position >= 0
+        B = IBMatlab('action','BUY','symbol',tickerB,'quantity',N,'type','MKT');
+    else
+        B = IBMatlab('action','BUY','symbol',tickerB,'quantity',(-position)+N,'type','MKT');
+    end
+end
+
+
+function S = SellOrder(tickerS, N)
+    position = get_position(tickerS);
+    if position <= 0
+        S = IBMatlab('action','SELL','symbol',tickerS,'quantity',N,'type','MKT');
+    else
+        S = IBMatlab('action','SELL','symbol',tickerS,'quantity',position+N,'type','MKT');
+    end
 end
 

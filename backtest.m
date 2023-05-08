@@ -33,8 +33,9 @@ function pnl = get_pnl(data)
     order = zeros(length(bar.data.close),4);
     pnl = zeros(length(bar.data.close),1);
     for i = 1:length(bar.data.close)-m
+        position = sum(order(1:idx-1,1));
         temp_bar = bar_window(i, m, 'TSLA', data);
-        [pos, close] = exe_test(temp_bar, dollar, p);
+        [pos, close] = exe_test(temp_bar, dollar, p, position);
         if ~isempty(pos)
             order(idx, 1) = pos;
             order(idx, 2) = close;
