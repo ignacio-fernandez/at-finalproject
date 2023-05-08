@@ -9,6 +9,7 @@ function start(handles)
     for t = tickers
         IBMatlab('action','realtime', 'symbol',t,'QuotesNumber',inf,'QuotesBufferSize',50,'useRTH',1);
     end
+    pause(1);
     
     while (1)
         % See if there's a more efficient way to create bars array
