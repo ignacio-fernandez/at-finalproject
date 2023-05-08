@@ -19,4 +19,4 @@
   2. trading signal
   3. execution function
 ## Instructions
-Run the main_program.m file
+Run the graph_test.m file
