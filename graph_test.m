@@ -22,7 +22,7 @@ function varargout = graph_test(varargin)
 
 % Edit the above text to modify the response to help graph_test
 
-% Last Modified by GUIDE v2.5 05-May-2023 13:08:05
+% Last Modified by GUIDE v2.5 08-May-2023 10:31:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -121,6 +121,8 @@ set(handles.pause_btn, 'visible', 'off');
 close_position();
 set(handles.portfolio_table, 'Data', []);
 set(handles.orders_table, 'Data', orders());
+cla(handles.pnl_graph);
+
 
 % --- Executes on slider movement.
 function slow_slider_Callback(hObject, eventdata, handles)
@@ -254,3 +256,19 @@ function input_table_CellEditCallback(hObject, eventdata, handles)
 A=get(hObject, 'Data');
 handles.A = A;
 guidata(hObject, handles);
+
+
+% --- Executes on button press in test_btn.
+function test_btn_Callback(hObject, eventdata, handles)
+% hObject    handle to test_btn (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.stop_btn, 'userdata', 1); % will be used to close position
+pause(5);
+set(handles.start_btn, 'Enable', 'on', 'visible', 'on');
+set(handles.stop_btn, 'visible', 'off');
+set(handles.pause_btn, 'visible', 'off');
+set(handles.portfolio_table, 'Data', []);
+set(handles.orders_table, 'Data', orders());
+pause(1);
+test(handles);

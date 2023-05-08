@@ -21,7 +21,6 @@ function start(handles)
 
         
         if get(handles.stop_btn, 'userdata') % stop condition
-            cla(handles.pnl_graph);
             break;
         end
 
